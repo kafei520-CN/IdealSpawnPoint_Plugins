@@ -1,0 +1,5 @@
+name: IdealSpawnPoint_Plugins
+version: '${project.version}'
+main: cn.kafei.isp.ideal_spawn_point.Ideal_spawn_point
+api-version: '1.20'
+authors: [咖啡Coffee]
