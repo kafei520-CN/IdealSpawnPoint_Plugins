@@ -1,5 +1,39 @@
-name: IdealSpawnPoint_Plugins
-version: '${project.version}'
+name: IdealSpawnPoint
+version: 1.0.1
 main: cn.kafei.isp.ideal_spawn_point.Ideal_spawn_point
-api-version: '1.20'
-authors: [咖啡Coffee]
+api-version: 1.20
+authors: [mckafei_CN | 1780412693]
+
+commands:
+  addspawn:
+    description: 添加当前位置为复活点
+    usage: /addspawn <唯一ID>
+  removespawn:
+    description: 移除指定ID的复活点
+    usage: /removespawn <ID>
+  listspawns:
+    description: 列出当前世界的复活点
+    usage: /listspawns
+  listallspawns:
+    description: 列出所有世界的复活点
+    usage: /listallspawns
+  removeallspawns:
+    description: 移除当前世界的所有复活点
+    usage: /removeallspawns
+
+permissions:
+  idealspawn.add:
+    description: 允许添加复活点
+    default: op
+  idealspawn.remove:
+    description: 允许移除复活点
+    default: op
+  idealspawn.list:
+    description: 允许列出复活点
+    default: true
+  idealspawn.list.all:
+    description: 允许列出所有世界的复活点
+    default: op
+  idealspawn.removeall:
+    description: 允许移除所有复活点
+    default: op
