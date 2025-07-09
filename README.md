@@ -1,0 +1,2 @@
+# IdealSpawnPoint_Plugins
+这是咖啡的第一个插件项目
