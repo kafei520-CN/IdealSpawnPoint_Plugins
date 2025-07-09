@@ -7,7 +7,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 public class Ideal_spawn_point extends JavaPlugin {
+
     @Override
     public void onEnable() {
         saveDefaultConfig();
@@ -15,9 +20,33 @@ public class Ideal_spawn_point extends JavaPlugin {
 
         registerCommands(spawnManager);
         registerListeners(spawnManager);
-        scheduleReloadCommands();
+
+        // 添加自动重载配置任务
+        if (getConfig().getBoolean("auto-reload.enabled", true)) {
+            List<Integer> delays = getConfig().getIntegerList("auto-reload.delays");
+            if (delays.isEmpty()) {
+                delays = Arrays.asList(30, 60); // 默认值
+            }
+            scheduleConfigReloads(delays);
+        }
 
         getLogger().info("IdealSpawnPoint插件已启用!作者咖啡，本版本为1.0.1");
+    }
+
+    private void scheduleConfigReloads(List<Integer> delays) {
+        for (int delay : delays) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if (getCommand("reloadconfig") != null) {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reloadconfig");
+                        getLogger().info("已自动执行/reloadconfig命令(" + delay + "秒后)");
+                    } else {
+                        getLogger().warning("reloadconfig命令未注册，无法执行自动重载");
+                    }
+                }
+            }.runTaskLater(this, 20L * delay);
+        }
     }
 
     private void registerCommands(SpawnManager spawnManager) {
@@ -26,11 +55,12 @@ public class Ideal_spawn_point extends JavaPlugin {
         registerCommandIfExists("listspawns", new ListSpawnsCommand(spawnManager));
         registerCommandIfExists("listallspawns", new ListAllSpawnsCommand(spawnManager));
         registerCommandIfExists("removeallspawns", new RemoveAllSpawnsCommand(spawnManager));
+        registerCommandIfExists("reloadconfig", new ReloadConfigCommand(spawnManager));
     }
 
     private void registerCommandIfExists(String commandName, CommandExecutor executor) {
         if (getCommand(commandName) != null) {
-            getCommand(commandName).setExecutor(executor);
+            Objects.requireNonNull(getCommand(commandName)).setExecutor(executor);
         }
     }
 
@@ -45,28 +75,10 @@ public class Ideal_spawn_point extends JavaPlugin {
         );
     }
 
-    private void scheduleReloadCommands() {
-        // 30秒后执行/reload
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reload");
-                getLogger().info("为了更好的加载，需要执行两次reload,（1）已执行/reload命令");
-            }
-        }.runTaskLater(this, 20 * 30);
-
-        // 1分钟后执行/reload
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reload");
-                getLogger().info("为了更好的加载，需要执行两次reload,（2）已执行/reload命令");
-            }
-        }.runTaskLater(this, 20 * 60);
-    }
-
     @Override
     public void onDisable() {
         getLogger().info("IdealSpawnPoint插件已禁用!");
     }
 }
+
+

@@ -1,5 +1,6 @@
 package cn.kafei.isp.ideal_spawn_point;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -55,7 +56,7 @@ public class SpawnManager {
             return false;
         }
 
-        String worldName = location.getWorld().getName();
+        String worldName = Objects.requireNonNull(location.getWorld()).getName();
         Map<String, Location> worldSpawns = worldSpawnPoints.computeIfAbsent(worldName, k -> new ConcurrentHashMap<>());
 
         if (worldSpawns.containsKey(customId)) {
@@ -121,5 +122,24 @@ public class SpawnManager {
         }
 
         plugin.saveConfig();
+    }
+
+    public void reloadConfig() {
+        // 1. 重新加载主配置文件
+        plugin.reloadConfig();
+
+        // 2. 清空现有数据
+        worldSpawnPoints.clear();
+
+        // 3. 重新加载所有世界配置
+        for (org.bukkit.World world : Bukkit.getWorlds()) {
+            loadWorldSpawnPoints(world.getName());
+        }
+
+        // 4. 如果有其他依赖的插件配置，也需要在这里触发它们的重载
+        // 例如：if (Bukkit.getPluginManager().isPluginEnabled("Multiworld")) {
+        //     Bukkit.getPluginManager().getPlugin("Multiworld").reloadConfig();
+        // }
+        loadAllSpawnPoints();
     }
 }

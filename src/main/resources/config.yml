@@ -1,2 +1,8 @@
+# 自动重载配置
+auto-reload:
+  enabled: true
+  delays: [30, 60] # 单位：秒
+
 # 复活点列表
 spawn-points: {}
+

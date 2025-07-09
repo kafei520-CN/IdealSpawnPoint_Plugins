@@ -53,12 +53,13 @@ public class ListSpawnsCommand implements CommandExecutor {
 
         // 默认列出当前世界的复活点
         String worldName;
-        if (sender instanceof Player) {
-            worldName = ((Player) sender).getWorld().getName();
-        } else {
+        if (!(sender instanceof Player)) {
             sender.sendMessage("§c控制台请使用 /listspawns all 查看所有复活点");
             return true;
         }
+
+        // 初始化worldName
+        worldName = ((Player)sender).getWorld().getName();
 
         Map<String, Location> spawnPoints = spawnManager.getSpawnPoints(worldName);
 

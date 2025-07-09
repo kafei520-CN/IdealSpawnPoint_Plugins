@@ -19,22 +19,22 @@ public class RemoveAllSpawnsCommand implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd,
                              @Nonnull String label, @Nonnull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§cOnly players can use this command!");
+            sender.sendMessage("§c只有管理员可以使用此命令!");
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("idealspawn.removeall")) {
-            player.sendMessage("§cYou don't have permission!");
+            player.sendMessage("§c你没有权限!");
             return true;
         }
 
         String worldName = player.getWorld().getName();
         if (spawnManager.removeAllSpawns(worldName)) {
-            player.sendMessage("§aAll spawn points removed from world: " + worldName);
+            player.sendMessage("§a已移除世界 " + worldName + " 中的所有复活点");
         } else {
-            player.sendMessage("§cNo spawn points found in this world!");
+            player.sendMessage("§c当前世界没有找到任何复活点!");
         }
 
         return true;

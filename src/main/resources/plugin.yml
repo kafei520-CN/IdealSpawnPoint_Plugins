@@ -20,6 +20,10 @@ commands:
   removeallspawns:
     description: 移除当前世界的所有复活点
     usage: /removeallspawns
+  reloadconfig:
+    description: 重载插件配置文件
+    usage: /reloadconfig
+    permission: idealspawn.reload
 
 permissions:
   idealspawn.add:
@@ -37,3 +41,8 @@ permissions:
   idealspawn.removeall:
     description: 允许移除所有复活点
     default: op
+  idealspawn.reload:
+    description: 允许重载配置文件
+    default: op
+
+softdepend: [Multiworld, SomeOtherWorldPlugin]
