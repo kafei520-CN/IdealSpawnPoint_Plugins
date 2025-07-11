@@ -47,6 +47,7 @@ language: zh
 # 自动重载配置
 auto-reload:
   delays: [30, 60] # 单位：秒
+```
 
 ## 兼容性表格
 
