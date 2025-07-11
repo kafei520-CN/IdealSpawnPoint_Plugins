@@ -1,0 +1,46 @@
+messages:
+  plugin_enabled: "IdealSpawnPoint plugin enabled! Author: Kafei, Version: 1.0.2"
+  plugin_disabled: "IdealSpawnPoint plugin disabled!"
+  config_auto_reloaded: "Auto-reloaded config after %d seconds"
+
+commands:
+  isp:
+    help_title: "§6===== IdealSpawnPoint Help ====="
+    help_add: "§a/isp add <ID> - Add spawn point"
+    help_remove: "§a/isp remove <ID> - Remove spawn point"
+    help_list: "§a/isp list - List spawn points in current world"
+    help_listall: "§a/isp listall - List all spawn points"
+    help_removeall: "§a/isp removeall - Remove all spawn points in current world"
+    help_reload: "§a/isp reload - Reload config"
+    unknown_command: "§cUnknown command! Use /isp to see available commands"
+
+  # 子命令消息
+  add:
+    success: "§aSpawn point added with ID: %s"
+    failure: "§cID already exists or is invalid!"
+
+  remove:
+    usage: "§cUsage: /isp remove <ID>"
+    success: "§aSuccessfully removed spawn point: %s"
+    failure: "§cInvalid ID or spawn point not found!"
+
+  reload:
+    success: "§aConfiguration reloaded!"
+
+errors:
+  no_permission: "§cYou don't have permission!"
+  no_spawn_points: "§6World %s has no spawn points"
+  spawn_removed: "§aRemoved spawn point from world %s"
+  spawn_not_found: "§cSpawn point with ID %s not found"
+  config_reloaded: "§aConfiguration successfully reloaded!"
+  player_only: "§cThis command can only be executed by players!"
+
+respawn:
+  message: "§aYou have been teleported to a random spawn point"
+  title: "§6§lRespawn"
+  subtitle: "§eNew location generated"
+
+list:
+  all_title: "§6===== All Spawn Points ====="
+  world_title: "§6===== Spawn Points in %s ====="
+  entry_format: "  §eID: %s - §7(§a%.1f§7, §a%.1f§7, §a%.1f§7)"

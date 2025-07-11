@@ -1,6 +1,8 @@
 package cn.kafei.isp.ideal_spawn_point.commands;
 
+import cn.kafei.isp.ideal_spawn_point.Ideal_spawn_point;
 import cn.kafei.isp.ideal_spawn_point.SpawnManager;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,25 +20,26 @@ public class RemoveAllSpawnsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd,
                              @Nonnull String label, @Nonnull String[] args) {
+        Ideal_spawn_point plugin = (Ideal_spawn_point) Bukkit.getPluginManager().getPlugin("IdealSpawnPoint");
+
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§c只有管理员可以使用此命令!");
+            sender.sendMessage(plugin.getMessage("errors.player_only"));
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("idealspawn.removeall")) {
-            player.sendMessage("§c你没有权限!");
+            sender.sendMessage(plugin.getMessage("errors.no_permission"));
             return true;
         }
 
         String worldName = player.getWorld().getName();
         if (spawnManager.removeAllSpawns(worldName)) {
-            player.sendMessage("§a已移除世界 " + worldName + " 中的所有复活点");
+            sender.sendMessage(plugin.getMessage("errors.spawn_removed", worldName));
         } else {
-            player.sendMessage("§c当前世界没有找到任何复活点!");
+            sender.sendMessage(plugin.getMessage("errors.no_spawn_points", worldName));
         }
-
         return true;
     }
 }

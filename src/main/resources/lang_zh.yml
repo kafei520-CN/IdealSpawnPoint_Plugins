@@ -1,0 +1,46 @@
+messages:
+  plugin_enabled: "IdealSpawnPoint插件已启用!作者咖啡，本版本为1.0.2"
+  plugin_disabled: "IdealSpawnPoint插件已禁用!"
+  config_auto_reloaded: "已自动执行配置重载(%d秒后)"
+
+commands:
+  isp:
+    help_title: "§6===== IdealSpawnPoint 帮助 ====="
+    help_add: "§a/isp add <ID> - 添加复活点"
+    help_remove: "§a/isp remove <ID> - 移除复活点"
+    help_list: "§a/isp list - 列出当前世界复活点"
+    help_listall: "§a/isp listall - 列出所有世界复活点"
+    help_removeall: "§a/isp removeall - 移除当前世界所有复活点"
+    help_reload: "§a/isp reload - 重载配置"
+    unknown_command: "§c未知命令! 使用/isp查看可用命令"
+
+  # 子命令消息
+  add:
+      success: "§a成功添加复活点，ID: %s"
+      failure: "§cID已存在或无效!"
+
+  remove:
+      usage: "§c用法: /isp remove <ID>"
+      success: "§a成功移除复活点: %s"
+      failure: "§c无效ID或当前世界未找到该复活点!"
+
+  reload:
+      success: "§a配置已重载!"
+
+errors:
+  no_permission: "§c你没有权限!"
+  no_spawn_points: "§6世界 %s 没有设置任何复活点"
+  spawn_removed: "§a已从世界 %s 移除复活点"
+  spawn_not_found: "§c未找到ID为 %s 的复活点"
+  config_reloaded: "§a配置文件已重载!"
+  player_only: "§c只有玩家可以使用此命令!"
+
+respawn:
+  message: "§a你已被传送到随机复活点"
+  title: "§6§l复活"
+  subtitle: "§e新位置已生成"
+
+list:
+  all_title: "§6===== 所有世界复活点 ====="
+  world_title: "§6===== 世界 %s 的复活点 ====="
+  entry_format: "  §eID: %s - §7(§a%.1f§7, §a%.1f§7, §a%.1f§7)"

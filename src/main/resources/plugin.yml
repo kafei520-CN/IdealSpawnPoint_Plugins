@@ -1,29 +1,15 @@
 name: IdealSpawnPoint
-version: 1.0.1
+version: 1.0.2
 main: cn.kafei.isp.ideal_spawn_point.Ideal_spawn_point
 api-version: 1.20
 authors: [mckafei_CN | 1780412693]
+softdepend: [Multiworld, SomeOtherWorldPlugin]
 
 commands:
-  addspawn:
-    description: 添加当前位置为复活点
-    usage: /addspawn <唯一ID>
-  removespawn:
-    description: 移除指定ID的复活点
-    usage: /removespawn <ID>
-  listspawns:
-    description: 列出当前世界的复活点
-    usage: /listspawns
-  listallspawns:
-    description: 列出所有世界的复活点
-    usage: /listallspawns
-  removeallspawns:
-    description: 移除当前世界的所有复活点
-    usage: /removeallspawns
-  reloadconfig:
-    description: 重载插件配置文件
-    usage: /reloadconfig
-    permission: idealspawn.reload
+  isp:
+    description: IdealSpawnPoint主命令
+    usage: /isp <子命令>
+    permission: idealspawn.use
 
 permissions:
   idealspawn.add:
@@ -45,4 +31,3 @@ permissions:
     description: 允许重载配置文件
     default: op
 
-softdepend: [Multiworld, SomeOtherWorldPlugin]
